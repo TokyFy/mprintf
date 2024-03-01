@@ -11,14 +11,18 @@
 # **************************************************************************** #
 
 
-sources = ft_printf.c flag_parser.c utils.c
+sources = ft_printf.c flag_parser.c utils.c ft_put_c.c \
+					ft_put_l.c ft_put_p.c ft_put_s.c ft_put_u.c 	\
+					ft_put_x.c ft_put_base.c
 
 cc = gcc
 flags = -Wall -Wextra -Werror
 name = libftprintf.a
 libft_dir = libft
 objects = $(sources:.c=.o)
-test_file = a.out
+
+test_exec = a.out
+test_files = $(test_exec)
 
 all: $(name)
 
@@ -33,12 +37,16 @@ lib :
 	@$(MAKE) -C $(libft_dir)
 
 test : all
-	cc -g main.c $(name)
-
+	cc -g _test_.c $(name) -o $(test_exec)
+	./$(test_exec)
+	@rm $(test_files)
+	
 clean:
-	@rm -f $(objects) $(test_file)
+	@$(MAKE) -C $(libft_dir) clean
+	@rm -f $(objects) $(test_files)
 
 fclean: clean
+	@$(MAKE) -C $(libft_dir) fclean
 	@rm -rf $(name)
 
 re : fclean all
