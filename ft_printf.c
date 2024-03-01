@@ -1,31 +1,20 @@
 #include "ft_printf.h"
-#include "libft/libft.h"
 #include <stdarg.h>
-
 
 int print_with_format(t_modifier *modifier , char specifier , va_list args)
 {
-  if(specifier == 'd' || specifier == 'i')
-    return ft_put_l(modifier, va_arg(args, int));
-  else if (specifier == 'u')
-    return ft_put_u(modifier, va_arg(args, unsigned int));
-  else if (specifier == 's')
-    return ft_put_s(modifier, va_arg(args, char*));
-  else if (specifier == 'c')
-    return ft_put_c(modifier, (char)va_arg(args, int));
-  else if(specifier == 'x')
-    return ft_put_x(modifier, va_arg(args, unsigned int));
-  else if(specifier == 'X')
-    return ft_put_X(modifier, va_arg(args, unsigned int));
-  else if(specifier == 'p')
-    return ft_put_p(modifier, va_arg(args, unsigned long));
+  IF     (specifier == 'd' || specifier == 'i', return _FORMAT_(ft_put_l, int));
+  ELSE_IF(specifier == 's', return _FORMAT_(ft_put_s, char*));
+  ELSE_IF(specifier == 'c', return _FORMAT_(ft_put_c, int));
+  ELSE_IF(specifier == 'x', return _FORMAT_(ft_put_x, unsigned int));
+  ELSE_IF(specifier == 'X', return _FORMAT_(ft_put_X, unsigned int));
+  ELSE_IF(specifier == 'p', return _FORMAT_(ft_put_p, unsigned long));
   else
   {
     ft_memset(modifier , 0,sizeof(t_modifier));
     return ft_put_c(modifier , specifier);
   }
-
-  return 0;
+  return -1;
 }
 
 int ft_printf(const char *format, ...)

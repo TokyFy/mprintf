@@ -5,6 +5,7 @@
 # define IF(boolish , expr) if(boolish) expr
 # define ELSE_IF(boolish , expr) else if(boolish) expr
 # define __INIT__(type ,var , value) type var = value
+# define _FORMAT_(handler,type) handler(modifier , (type)va_arg(args , type))
 
 #include "libft/libft.h"
 #include "stdlib.h"

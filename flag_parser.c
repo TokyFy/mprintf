@@ -8,17 +8,12 @@ int is_flags(char c)
 void parse_flags(const char **format , t_modifier *modifier)
 {
   while (is_flags(**format) && **format) {
-    if(**format == '-')
-      modifier->minus = 1;
-    else if(**format == '+')
-      modifier->plus = 1;
-    else if(**format == ' ')
-      modifier->space = 1;
-    else if(**format == '#')
-      modifier->hash = 1;
-    else if(**format == '0')
-      modifier->zero = 1;
-    (*format)++;
+      IF(**format == '-' , modifier->minus = 1);
+      ELSE_IF(**format == '+', modifier->plus = 1);
+      ELSE_IF(**format == ' ', modifier->space = 1);
+      ELSE_IF(**format == '#', modifier->hash = 1);
+      ELSE_IF(**format == '0', modifier->zero = 1);
+        (*format)++;
   }
   while (ft_isdigit(**format)) {
     modifier->with = modifier->with * 10 + (**format - '0');

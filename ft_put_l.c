@@ -26,5 +26,5 @@ int ft_put_l(t_modifier *modifier , long long nbr)
   ft_putstr_fd(s , 1);
   free(s);
   IF(modifier->minus , repeat(padd_c, modifier->with - modifier->precision));
-  return modifier->with;
+  return modifier->with + modifier->plus;
 }
