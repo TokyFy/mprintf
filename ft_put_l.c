@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int ft_put_l(t_modifier *modifier , long long nbr)
+int ft_put_l(t_modifier *modifier , long nbr)
 {
   __INIT__(char*, s, ft_ltoa(ABS(nbr)));
   __INIT__(int, l_s, ft_strlen(s));
@@ -10,7 +10,7 @@ int ft_put_l(t_modifier *modifier , long long nbr)
   IF((modifier->precision == 0 && nbr == 0) , return 0);
   IF(modifier->precision != -1 , modifier->zero = 0);
   modifier->precision = max(modifier->precision , l_s);
-  IF(modifier->plus || modifier->space, modifier->with--);
+  IF(modifier->plus || modifier->space || nbr < 0, modifier->with--);
   modifier->with = max(modifier->with , modifier->precision);
   IF(modifier->zero && !modifier->minus , padd_c = '0');
   if(nbr > 0)

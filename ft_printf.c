@@ -9,6 +9,7 @@ int print_with_format(t_modifier *modifier , char specifier , va_list args)
   ELSE_IF(specifier == 'x', return _FORMAT_(ft_put_x, unsigned int));
   ELSE_IF(specifier == 'X', return _FORMAT_(ft_put_X, unsigned int));
   ELSE_IF(specifier == 'p', return _FORMAT_(ft_put_p, unsigned long));
+  ELSE_IF(specifier == 'u', return _FORMAT_(ft_put_u, unsigned int));
   else
   {
     ft_memset(modifier , 0,sizeof(t_modifier));
@@ -33,7 +34,7 @@ int ft_printf(const char *format, ...)
       parse_flags(&format, &modifier);
       count += print_with_format(&modifier, *format++, args);
     }
-    if(*format)
+    if(*format && *format != '%')
     {
       count++;
       ft_putchar_fd(*format, 1);

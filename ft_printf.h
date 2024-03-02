@@ -22,7 +22,7 @@ typedef struct modifier
 } t_modifier;
 
 int ft_printf(const char *format, ...);
-int ft_put_l(t_modifier *modifier , long long nbr);
+int ft_put_l(t_modifier *modifier , long nbr);
 int ft_put_u(t_modifier *modifier , long nbr);
 int ft_put_s(t_modifier *modifier , char *str);
 int ft_put_c(t_modifier *modifier , char chr);
