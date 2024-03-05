@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-# define _F "|%s %d|\n"
-# define _A "hello", 42
+# define _F "|%#050x|\n"
+# define _A 65421314
 
 int	main(void)
 {

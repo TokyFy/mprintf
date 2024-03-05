@@ -1,6 +1,5 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
-#include <stdlib.h>
 
 void	x_handle_with(t_modifier *modifier, char *snbr, long nbr)
 {
@@ -33,6 +32,7 @@ int	ft_put_base(t_modifier *modifier, unsigned long nbr, char *base, char *sign)
 	char	*s;
 
 	s = ft_ultoa_base(nbr, base);
+  int l_s = ft_strlen(s);
 	if (modifier->zero && modifier->precision == -1)
 		x_sign_handler(modifier, sign);
 	if (!modifier->minus)
@@ -43,7 +43,8 @@ int	ft_put_base(t_modifier *modifier, unsigned long nbr, char *base, char *sign)
 	if (!(nbr == 0 && modifier->precision == 0))
 		ft_putstr_fd(s, 1);
 	if (modifier->minus)
-		x_handle_with(modifier, s, nbr);
-free(s);
-	return (max(modifier->with, ft_strlen(s)));
+	  x_handle_with(modifier, s, nbr);
+  if(modifier->hash)
+    return max(modifier->with, l_s) + ft_strlen(sign);
+	return (max(modifier->with, l_s));
 }
