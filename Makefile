@@ -25,7 +25,7 @@ test_exec = a.out
 test_files = $(test_exec)
 
 all: $(name)
-
+bonus: all
 $(name) : $(objects) lib
 	@cp $(libft_dir)/libft.a $(name)
 	@ar rcs $(name) $(objects)
@@ -39,7 +39,6 @@ lib :
 test : all
 	cc -g _test_.c $(name) -o $(test_exec)
 	./$(test_exec)
-	@rm $(test_files)
 	
 clean:
 	@$(MAKE) -C $(libft_dir) clean
