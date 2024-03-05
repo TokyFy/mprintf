@@ -7,14 +7,14 @@ void repeat(char c , int n)
   }
 }
 
-int max(int a , int b)
+long long max(long long a , long long b)
 {
   if(a > b)
     return a;
   return b;
 }
 
-int min(int a , int b)
+long long min(long long a , long long b)
 {
   if(a < b)
     return a;
@@ -66,7 +66,7 @@ static int	count_digit_base(long long n , int base)
 
 char	*ft_ltoa_base(long long i , char* base)
 {
-	long		n;
+	long long	n;
 	int		digit;
 	char	*str;
   int nbase = ft_strlen(base);
@@ -87,5 +87,34 @@ char	*ft_ltoa_base(long long i , char* base)
 	}
 	if (i < 0)
 		*str = '-';
+	return (str);
+}
+
+static int	ul_count_digit_base(unsigned long long n , int base)
+{
+	if (n < (unsigned long long)base)
+		return (1);
+	return (1 + ul_count_digit_base(n / base , base));
+}
+
+char	*ft_ultoa_base(unsigned long long i , char* base)
+{
+	unsigned long long	n;
+	int		digit;
+	char	*str;
+  int nbase = ft_strlen(base);
+
+	n = i;
+	digit = ul_count_digit_base(n , nbase);
+	str = 0;
+	str = ft_calloc(digit + 1, sizeof(char));
+	if (!str)
+		return (0);
+	while (digit > 0)
+	{
+		*(str + digit - 1) = base[(n % 16)];
+		n = n / nbase;
+		digit--;
+	}
 	return (str);
 }

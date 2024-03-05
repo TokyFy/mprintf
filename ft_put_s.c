@@ -1,21 +1,27 @@
 #include "ft_printf.h"
+#include "libft/libft.h"
+#include <stdlib.h>
+
+void s_handle_width(t_modifier *modifier , char *str)
+{
+    if(!modifier->minus)
+      repeat(' ', modifier->with - ft_strlen(str));
+    modifier->minus = !modifier->minus;
+}
 
 int ft_put_s(t_modifier *modifier , char *str)
 {
   if(!str)
   {
-    IF(modifier->precision < 6 && modifier->precision != -1 , modifier->precision = 0);
-    return ft_put_s(modifier, "(null)");
+    if(modifier->precision != -1 && modifier->precision < 5)
+      modifier->precision = 0;
+    ft_put_s(modifier, "(null)");
+    return modifier->with;
   }
-  t_size_t l_str = ft_strlen(str);
-  char *s = ft_substr(str, 0, modifier->precision);
-  IF(modifier->precision == -1 , modifier->precision = l_str);
-  modifier->precision = min(modifier->precision , l_str);
-  modifier->with = max(modifier->with, modifier->precision);
-  IF(!s , return -1);
-  IF(!modifier->minus , repeat(' ', modifier->with - modifier->precision));
+  char *s = ft_substr(str, 0, min(modifier->precision, ft_strlen(str)));
+  s_handle_width(modifier, s);
   ft_putstr_fd(s, 1);
+  s_handle_width(modifier, s);
   free(s);
-  IF(modifier->minus , repeat(' ', modifier->with - modifier->precision));
   return modifier->with;
 }
