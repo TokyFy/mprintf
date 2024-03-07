@@ -49,7 +49,9 @@ void	parse_flags(const char **format, t_modifier *modifier, va_list *args)
 		}
 		if (**format == '*')
 		{
-			modifier->precision = va_arg(*args, unsigned int);
+			modifier->precision = va_arg(*args, int);
+      if(modifier->precision < 0)
+        modifier->precision = -1;
 			(*format)++;
 		}
 	}

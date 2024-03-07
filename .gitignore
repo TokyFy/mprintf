@@ -3,3 +3,4 @@ _TEST_
 *.o
 *.a
 a.out
+pft/

@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-# define _F "|%#050x|\n"
-# define _A 65421314
+# define _F "|%.*s|\n"
+# define _A -3 , 0
 
 int	main(void)
 {
