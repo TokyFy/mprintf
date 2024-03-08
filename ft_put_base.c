@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 #include "libft/libft.h"
+#include <stdlib.h>
 
 void	x_handle_with(t_modifier *modifier, char *snbr, long nbr)
 {
@@ -7,7 +8,7 @@ void	x_handle_with(t_modifier *modifier, char *snbr, long nbr)
   int l_s = ft_strlen(snbr);
 	padd = ' ';
 	modifier->with = max(modifier->with, modifier->precision);
-	if (modifier->hash)
+	if (modifier->hash  && !(nbr == 0 && (modifier->precision == 0 ||  modifier->precision == -1)))
 		modifier->with -= 2;
 	if (modifier->zero && !modifier->minus && modifier->precision == -1)
 	  	padd = '0';
@@ -23,7 +24,7 @@ void	x_handle_precision(t_modifier *modifier, char *snbr)
 
 void	x_sign_handler(t_modifier *modifier, char *sign , long nbr)
 {
-	if (modifier->hash && !(nbr == 0 && modifier->precision == 0))
+	if (modifier->hash && !(nbr == 0 && (modifier->precision == 0 ||  modifier->precision == -1)))
 		ft_putstr_fd(sign, 1);
 }
 
@@ -33,10 +34,8 @@ int x_count(t_modifier *modifier , unsigned long nbr , char*s_nbr , char *sign)
   if(modifier->with == 0  &&  modifier->precision == 0  &&  nbr == 0)
     return 0;
   count = max(modifier->with, max(modifier->precision, ft_strlen(s_nbr)));
-  if(modifier->hash && !(modifier->precision == 0 && nbr == 0))
+  if(modifier->hash && !(modifier->precision <= 0 && nbr == 0))
   {
-    //if((max(modifier->with, modifier->precision) - ((long long)ft_strlen(s_nbr) + 2)) < 0)
-    //  count += ft_strlen(sign);
     return max(modifier->with, max(modifier->precision, ft_strlen(s_nbr)+ft_strlen(sign)));
   }
   return count;
@@ -59,5 +58,6 @@ int	ft_put_base(t_modifier *modifier, unsigned long nbr, char *base, char *sign)
 		ft_putstr_fd(s, 1);
 	if (modifier->minus)
 	  x_handle_with(modifier, s, nbr);
+  free(s);
  	return count;
 }
