@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franaivo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/09 15:22:34 by franaivo          #+#    #+#             */
+/*   Updated: 2024/03/09 15:22:34 by franaivo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include "libft/libft.h"
 #include <stdarg.h>
@@ -27,11 +39,21 @@ int	print_with_format(t_modifier *modifier, char specifier, va_list *args)
 	return (-1);
 }
 
+int	handle_specifier(char **format, va_list *args)
+{
+	t_modifier	modifier;
+
+	(*format)++;
+	ft_bzero(&modifier, sizeof(t_modifier));
+	modifier.precision = -1;
+	parse_flags((const char **)format, &modifier, args);
+	return (print_with_format(&modifier, **format, args));
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list		args;
 	t_size_t	count;
-			t_modifier modifier;
 	int			r;
 
 	va_start(args, format);
@@ -40,11 +62,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
+			r = handle_specifier((char **)&format, &args);
 			format++;
-			ft_bzero(&modifier, sizeof(t_modifier));
-			modifier.precision = -1;
-			parse_flags(&format, &modifier, &args);
-			r = print_with_format(&modifier, *format++, &args);
 			if (r != -1)
 				count += r;
 			else
@@ -53,8 +72,7 @@ int	ft_printf(const char *format, ...)
 		if (*format && *format != '%')
 		{
 			count++;
-			ft_putchar_fd(*format, 1);
-			format++;
+			ft_putchar_fd(*format++, 1);
 		}
 	}
 	va_end(args);

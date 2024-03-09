@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _test_.c                                           :+:      :+:    :+:   */
+/*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: franaivo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 15:23:23 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/09 15:23:23 by franaivo         ###   ########.fr       */
+/*   Created: 2024/03/09 16:28:01 by franaivo          #+#    #+#             */
+/*   Updated: 2024/03/09 16:28:01 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "../libft/libft.h"
 
-#define _F "%d"
-#define _A 255
-
-int	main(void)
+void	repeat(char c, int n)
 {
-	int	ft;
-	int	pr;
-
-	ft = ft_printf(_F, _A);
-	printf("|\n");
-	pr = printf(_F, _A);
-	printf("|\n");
-	printf("\n%d | %d", ft, pr);
+	while (n-- > 0)
+	{
+		ft_putchar_fd(c, 1);
+	}
 }

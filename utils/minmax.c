@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _test_.c                                           :+:      :+:    :+:   */
+/*   minmax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: franaivo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 15:23:23 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/09 15:23:23 by franaivo         ###   ########.fr       */
+/*   Created: 2024/03/09 16:27:54 by franaivo          #+#    #+#             */
+/*   Updated: 2024/03/09 16:27:54 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
-
-#define _F "%d"
-#define _A 255
-
-int	main(void)
+long long	max(long long a, long long b)
 {
-	int	ft;
-	int	pr;
+	if (a > b)
+		return (a);
+	return (b);
+}
 
-	ft = ft_printf(_F, _A);
-	printf("|\n");
-	pr = printf(_F, _A);
-	printf("|\n");
-	printf("\n%d | %d", ft, pr);
+long long	min(long long a, long long b)
+{
+	if (a < b)
+		return (a);
+	return (b);
 }
