@@ -14,7 +14,7 @@ int	ft_put_s(t_modifier *modifier, char *str)
 	char	*s;
 	if (!str)
 	{
-		if (modifier->precision != -1 && modifier->precision < 5)
+		if (modifier->precision != -1 && modifier->precision < 6)
 			modifier->precision = 0;
 		return ft_put_s(modifier, "(null)");
 	}

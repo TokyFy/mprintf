@@ -24,7 +24,7 @@ void	x_handle_precision(t_modifier *modifier, char *snbr)
 
 void	x_sign_handler(t_modifier *modifier, char *sign , long nbr)
 {
-	if (modifier->hash && !(nbr == 0 && (modifier->precision == 0 ||  modifier->precision == -1)))
+	if (modifier->hash && !(nbr == 0))
 		ft_putstr_fd(sign, 1);
 }
 

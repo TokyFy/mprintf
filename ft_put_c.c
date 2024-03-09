@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include "libft/libft.h"
 
 int	ft_put_c(t_modifier *modifier, char chr)
 {
@@ -6,7 +7,11 @@ int	ft_put_c(t_modifier *modifier, char chr)
 	*s = chr;
  	if (!chr)
  	{
- 	 	repeat(' ', modifier->with - 1);
+    if(!modifier->minus)
+ 	 	    repeat(' ', modifier->with - 1);
+    ft_putchar_fd('\0', 1);
+    if(modifier->minus)
+ 	 	    repeat(' ', modifier->with - 1);
  		return (max(modifier->with , 1));
  	}
 	modifier->precision = (chr != 0);

@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-# define _F "%#5x"
+# define _F "%#.3x"
 # define _A 0
 
 int	main(void)
