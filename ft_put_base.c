@@ -52,8 +52,8 @@ int	x_count(t_modifier *modifier, unsigned long nbr, char *s_nbr, char *sign)
 	count = max(modifier->with, max(modifier->precision, ft_strlen(s_nbr)));
 	if (modifier->hash && !(modifier->precision <= 0 && nbr == 0))
 	{
-		return (max(modifier->with, max(modifier->precision, ft_strlen(s_nbr)
-					+ ft_strlen(sign))));
+		return (max(modifier->with, max(modifier->precision + ft_strlen(sign),
+					ft_strlen(s_nbr) + ft_strlen(sign))));
 	}
 	return (count);
 }
