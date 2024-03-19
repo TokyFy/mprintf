@@ -6,15 +6,15 @@
 /*   By: franaivo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 15:23:23 by franaivo          #+#    #+#             */
-/*   Updated: 2024/03/11 12:13:16 by franaivo         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:37:24 by franaivo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-#define _F "%#50.70x"
-#define _A 255
+#define _F "%#50.70x %d %s"
+#define _A 
 
 int	main(void)
 {
